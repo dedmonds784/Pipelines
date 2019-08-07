@@ -4,7 +4,7 @@ In the last notebook, we created the pipeline that can handle our tasks. This pi
 
 A DAG can be described in terms of a tree. The **graph** part of the tree is made of a series of verticies (nodes) and edges (branches). 
 
-<img src="images/graph.png" alt="graph" style="width: 500px; height: 400px"/>
+<img src="images/graph.png" alt="graph" style="width: 400px; height: 300px"/>
 
 
 **Directed** says that each of the edges points in one direction.
