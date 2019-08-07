@@ -4,32 +4,32 @@ In the last notebook, we created the pipeline that can handle our tasks. This pi
 
 A DAG can be described in terms of a tree. The **graph** part of the tree is made of a series of verticies (nodes) and edges (branches). 
 
-<img src="Documents/data/Big Data /Pipelines/multi dependency Pipeline/images/graph.png" alt="graph" style="width: 500px; height: 400px"/>
+<img src="graph.png" alt="graph" style="width: 500px; height: 400px"/>
 
 
 **Directed** says that each of the edges points in one direction.
 
-<img src="Documents/data/Big Data /Pipelines/multi dependency Pipeline/images/dgraph.png" alt="dgraph" style="width: 500px; height: 400px"/>
+<img src="images/dgraph.png" alt="dgraph" style="width: 500px; height: 400px"/>
 
 
 
 Last, **Acyclic** says the graph does not have any cycles. 
 The image below is an example of a graph with a cycle.
 
-<img src="Documents/data/Big Data /Pipelines/multi dependency Pipeline/images/cycle.png" alt="cycle" style="width: 500px; height: 400px"/>
+<img src="images/cycle.png" alt="cycle" style="width: 500px; height: 400px"/>
 
 
 ## DAG
 For refrence, the sencond image in the notebook holds the requirements of a DAG. First, there are a series of verticies and edges, second, each task has a direction, and third, there are no cycles. You can see this in the re-printed image below.
 
-<img src="Documents/data/Big Data /Pipelines/multi dependency Pipeline/images/dgraph.png" alt="dgraph" style="width: 500px; height: 400px"/>
+<img src="images/dgraph.png" alt="dgraph" style="width: 500px; height: 400px"/>
 
 
 The DAG structure was built to naturally crate and **efficient** ordering of dependent tasks. Using a DAG scheduler allows us to implement schedueling in **linear** time, such that **O(V + E)**, where **V** and **E**  are the amount of verticies and edges.
 
 Another things to remember is that unlike the last pipeline, a graph structure will **not** always start with a single root node. For example, the image below shows us a 3 root DAG.
 
-<img src="Documents/data/Big Data /Pipelines/multi dependency Pipeline/images/3dag.png" alt="3dag" style="width: 500px; height: 400px"/>
+<img src="images/3dag.png" alt="3dag" style="width: 500px; height: 400px"/>
 The behavior we are looking for is to be able to link verticies to multiple nodes in a graph. We then need to be able easily loop through nodes to create the graph. In Python, this can be done using a dict with list values. 
 
 Example...
@@ -98,7 +98,7 @@ Our use case for the DAG was to create a pipeline that allows us to place tasks 
 
 In our original DAG graph, node 1 is the most depended on and each of the nodes along the path decrease in importance. We can also think of it as the longer the path to the node, the less that node is depended on.
 
-<img src="Documents/data/Big Data /Pipelines/multi dependency Pipeline/images/dgraph.png" alt="dgraph" style="width: 500px; height: 400px"/>
+<img src="images/dgraph.png" alt="dgraph" style="width: 500px; height: 400px"/>
 
 
 With this hypothesis, can can do the following:
@@ -110,7 +110,7 @@ This process comes with some time complexity drawbacks. Such as, for 2 and 3 the
 
 In order to implement our sorting algorithm to find the longest path it's necessary to know which nodes "start" the directed graph. Start in this scenario context refers to the root node that the graph expands from. As you can see below, the 3 root dag has three root nodes.
 
-<img src="Documents/data/Big Data /Pipelines/multi dependency Pipeline/images/3dag.png" alt="3dag" style="width: 500px; height: 400px"/>
+<img src="images/3dag.png" alt="3dag" style="width: 500px; height: 400px"/>
 
 
 To determine whhich nodes we can considered to be root nodes we must think about the number of *in-degrees* a node contains. **in-degrees** can be described as the total count of edges pointing **towards** the node. For example, in the graph above we can see node five has two in-degrees, and node eight has three in-degrees, but each root node will always have zero in-degrees.
